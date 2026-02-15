@@ -23,7 +23,7 @@ export default function ChatBox() {
     setSessionId(storedSession);
 
     axios
-      .get(`http://127.0.0.1:8000/chat/history/${storedSession}`)
+      .get(`${import.meta.env.VITE_API_URL}/${storedSession}`)
       .then((res) => {
         setMessages(res.data.messages || []);
       })
@@ -53,7 +53,7 @@ export default function ChatBox() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/chat/",
+        `${import.meta.env.VITE_API_URL}/chat/`,
         
         {
           message: message,

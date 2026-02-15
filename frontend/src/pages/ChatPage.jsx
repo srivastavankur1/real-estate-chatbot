@@ -17,7 +17,7 @@ export default function ChatPage() {
 
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/chat/sessions/${userId}`
+          `${import.meta.env.VITE_API_URL}/chat/sessions/${userId}`
         );
         setSessions(response.data.sessions || []);
       } catch (error) {
