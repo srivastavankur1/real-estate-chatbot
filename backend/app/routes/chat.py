@@ -2,8 +2,6 @@ from fastapi import APIRouter, Request
 from pydantic import BaseModel
 from uuid import uuid4
 from app.services.mongo_service import append_message
-
-
 from app.llm import get_filter_chain, get_intent_chain
 from app.services.property_filter import filter_properties
 from app.services.mongo_service import (
@@ -42,19 +40,19 @@ async def chat(request: ChatRequest, fastapi_request: Request):
 
     # GREETING
     if intent == "greeting":
-        reply = "Hello! 👋 I'm your real estate assistant. How can I help you today?"
+        reply = "Hello! I'm your real estate assistant. How can I help you today?"
         results = []
         merged_filters = old_filters
 
     # OUT OF DOMAIN
     elif intent == "out_of_domain":
-        reply = "I'm a real estate assistant 🤖. I can help you find properties based on location, budget, bedrooms and amenities."
+        reply = "I'm a real estate assistant. I can help you find properties based on location, budget, bedrooms and amenities."
         results = []
         merged_filters = old_filters
 
     # CASUAL
     elif intent == "casual":
-        reply = "I'm here to help you find the perfect property 😊 Tell me your preferred location or budget."
+        reply = "I'm here to help you find the perfect property. Tell me your preferred location or budget."
         results = []
         merged_filters = old_filters
 
@@ -99,7 +97,7 @@ async def chat(request: ChatRequest, fastapi_request: Request):
             if len(results) > 0:
                 reply = f"I found {len(results)} property(s) matching your request."
             else:
-                reply = "I'm here to help you find properties 😊 Tell me location, budget, or number of bedrooms."
+                reply = "I'm here to help you find properties Tell me location, budget, or number of bedrooms."
 
             merged_filters = old_filters
 

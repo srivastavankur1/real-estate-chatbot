@@ -10,10 +10,12 @@ def filter_properties(filters: Dict, properties: List[Dict]) -> List[Dict]:
 
     # Location 
     if "location" in filters:
-        results = [
-            p for p in results
-            if filters["location"].lower() in p["location"].lower()
-        ]
+        search_loc = filters["location"].replace(" ", "").lower()
+
+    results = [
+        p for p in results
+        if search_loc in p["location"].replace(" ", "").lower()
+    ]
 
     # Bedrooms 
     if "bedrooms" in filters:

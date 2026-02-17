@@ -78,6 +78,16 @@ def get_saved_properties(user_id):
         return user.get("saved_properties", [])
     return []
 
+def remove_property_for_user(user_id, property_id):
+    user_collection.update_one(
+        {"_id": ObjectId(user_id)},
+        {
+            "$pull": {
+                "saved_properties": {"id": property_id}
+            }
+        }
+    )
+
 
 def append_message(session_id: str, message: dict):
     session_collection.update_one(

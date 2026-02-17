@@ -23,7 +23,7 @@ export default function ChatBox() {
     setSessionId(storedSession);
 
     axios
-      .get(`${import.meta.env.VITE_API_URL}/${storedSession}`)
+      .get(`${import.meta.env.VITE_API_URL}/chat/history/${storedSession}`)
       .then((res) => {
         setMessages(res.data.messages || []);
       })
